@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react"
 function Habit() {
   const habitsEndpoint = "/api/habits";
   const [backendHabits, setBackendHabits] = useState("")
+  const [action, setAction] = useState("")
+
 
   const fetchHabits = async () => {
     try {
@@ -30,10 +32,12 @@ function Habit() {
     } catch (error) {
       console.log("Could not delete the habit!" + error);
     }
+
+    fetchHabits();
   }
   
   const addHabit = (e) => {
-    console.log(e);
+    e.preventDefault();
     
     const newHabit = { "action": e.target[0].value }
     fetch(habitsEndpoint, {
@@ -45,7 +49,8 @@ function Habit() {
     })
     .then(res => res.json())
     
-    console.log(newHabit)
+    setAction("");
+    fetchHabits()
   }
 
   useEffect(() =>  fetchHabits , [])
@@ -55,7 +60,7 @@ function Habit() {
       <form onSubmit={addHabit}>
         <label>
           Add habit:
-    <input type="text" name="habit" />
+    <input type="text" name="habit" value={action}  onChange={event => setAction(event.target.value)}/>
         </label>
         <input type="submit" value="Submit" />
       </form>
