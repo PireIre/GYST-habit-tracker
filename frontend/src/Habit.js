@@ -5,7 +5,6 @@ function Habit() {
   const [backendHabits, setBackendHabits] = useState("")
   const [action, setAction] = useState("")
 
-
   const fetchHabits = async () => {
     try {
       fetch(habitsEndpoint)
@@ -13,7 +12,8 @@ function Habit() {
       .then(habits => {
         setBackendHabits(habits)
       })
-    } catch (error) {
+    } 
+    catch (error) {
       console.log("Could not fetch the habits!" + error);
     }
   };
@@ -38,8 +38,16 @@ function Habit() {
   
   const addHabit = (e) => {
     e.preventDefault();
+
+    var time = prompt("How many minutes will you " + e.target[0].value + " for?");
+    var location = prompt("Where will you " + e.target[0].value + "?")
     
-    const newHabit = { "action": e.target[0].value }
+    const newHabit = {
+       "action": e.target[0].value, 
+       "time": time,
+       "location": location,
+      }
+
     fetch(habitsEndpoint, {
       method: 'POST',
       headers: {
@@ -66,7 +74,7 @@ function Habit() {
       </form>
       <h1>List of habits</h1>
       {backendHabits && backendHabits.map((habit, i) =>
-        <li key={i}>{habit.action} <div onClick={() => handleDeleteHabit(habit._id)} style={{ color: "red", display: "inline", cursor: "pointer" }}>X</div></li>
+        <li key={i}>{"I will " + habit.action + " for " + habit.time + " minutes, in " + habit.location} <div onClick={() => handleDeleteHabit(habit._id)} style={{ color: "red", display: "inline", cursor: "pointer" }}>X</div></li>
       )}
     </div>
   );

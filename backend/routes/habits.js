@@ -7,8 +7,7 @@ const router = express.Router();
 router.get('/', async(req, res) => {
   const habits = await Habit
   .find()
-  .select({ action: 1 }) //ascending order (-1 is descending)
-
+  
   res.send(habits)
 })
 
