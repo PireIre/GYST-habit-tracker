@@ -20,6 +20,7 @@ validateHabitRequest = (habit) => {
  return schema.validate(habit);
 }
 
+exports.habitSchema = habitSchema;
 exports.validate = validateHabitRequest;
 exports.Habit = Habit;
 
