@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 function Habit() {
-  const habitsEndpoint = "/api/habits";
+  const habitsEndpoint = "/api/habit";
   const [backendHabits, setBackendHabits] = useState("")
   const [action, setAction] = useState("")
 
