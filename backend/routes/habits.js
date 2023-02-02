@@ -2,6 +2,7 @@ const express = require('express')
 const { validate, Habit } = require('../models/habit')
 const { Bundle } = require('../models/bundle')
 const router = express.Router();
+const auth = require("../middleware/auth")
 
 
 // GET all
@@ -13,7 +14,7 @@ router.get('/', async(req, res) => {
 })
 
 // GET one
-router.get('/:id', async (req,res) => {
+router.get('/:id', auth, async (req,res) => {
     const habit = await Habit.findById(req.params.id)
 
   if (!habit) return res.status(404).send("404 - Habit not found")
@@ -22,7 +23,7 @@ router.get('/:id', async (req,res) => {
 })
 
 // POST
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message)
 
@@ -38,7 +39,7 @@ router.post("/", async (req, res) => {
 })
 
 // PUT
-router.put("/:id", async(req, res) => {
+router.put("/:id", auth, async(req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -73,7 +74,7 @@ router.put("/:id", async(req, res) => {
   })
 
 // DELETE
-router.delete('/:id', async(req,res) => {
+router.delete('/:id', auth, async(req,res) => {
   let habit = await Habit.findById(req.params.id)
   if (!habit) return res.status(404).send("Habit does not exist and can therefore not be deleted")
 

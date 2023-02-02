@@ -2,9 +2,11 @@ const express = require('express')
 const { validate, Bundle } = require('../models/bundle')
 const { Habit } = require('../models/habit')
 const router = express.Router();
+const auth = require("../middleware/auth")
+
 
 // GET all bundles
-router.get('/', async(req, res) => {
+router.get('/', auth, async(req, res) => {
   const bundle = await Bundle
   .find()
   
@@ -12,7 +14,7 @@ router.get('/', async(req, res) => {
 })
 
 // GET one
-router.get('/:id', async (req,res) => {
+router.get('/:id', auth, async (req,res) => {
   const bundle = await Bundle.findById(req.params.id)
 
   if (!bundle) return res.status(404).send("404 - Bundle not found")
@@ -21,7 +23,7 @@ router.get('/:id', async (req,res) => {
 })
 
 // POST bundle
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message)
 
@@ -36,7 +38,7 @@ router.post("/", async (req, res) => {
 })
 
 // DELETE bundle
-router.delete('/:id', async(req,res) => {
+router.delete('/:id', auth, async(req,res) => {
   let bundle = await Bundle.findByIdAndRemove(req.params.id)
   if (!bundle) return res.status(404).send("Bundle does not exist and can therefore not be deleted")
 
@@ -44,7 +46,7 @@ router.delete('/:id', async(req,res) => {
 })
 
 // PUT bundle name
-router.put("/:id", async (req, res) => {
+router.put("/:id", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message)
 
@@ -58,7 +60,7 @@ router.put("/:id", async (req, res) => {
 })
 
 // POST habit to bundle 
-router.post("/:id/habit", async (req, res) => {
+router.post("/:id/habit", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message)
 
@@ -79,7 +81,7 @@ router.post("/:id/habit", async (req, res) => {
 })
 
 // DELETE habit from bundle 
-router.delete('/:id/habit/:habitId', async(req,res) => {
+router.delete('/:id/habit/:habitId', auth, async(req,res) => {
   let bundle = await Bundle.findById(req.params.id)
   if (!bundle) return res.status(404).send("Bundle does not exist")
 
