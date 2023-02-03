@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import Habit from "./Habit"
+import Habit from "./components/Habit"
 
 function App() {
   return (
