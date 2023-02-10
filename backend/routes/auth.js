@@ -3,6 +3,8 @@ const { User } = require('../models/user')
 const router = express.Router();
 const bcrypt = require("bcrypt")
 const Joi = require('joi');
+const auth = require("../middleware/auth")
+
 
 // POST
 router.post("/", async (req, res) => {
@@ -18,6 +20,11 @@ router.post("/", async (req, res) => {
   const token = user.generateAuthToken();
   res.send(token)
 })
+
+router.get("/protected", auth, (req, res) => {
+  // Access the decoded token data from the request object
+  res.send(req.user);
+});
 
 validate = (user) => {
   const schema = Joi.object({
