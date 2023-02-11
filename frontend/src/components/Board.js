@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import GystNavbar from './GystNavbar'
+import Past30Days from './Past30Days'
 
 
 const Board = () => {
@@ -31,7 +32,9 @@ const Board = () => {
       <GystNavbar />
       <Container fluid>
         <Row>
-          <Col ></Col>
+          <Col xs={1}>
+          <Past30Days />
+          </Col>
 
           {backendHabits && backendHabits.map((habit, i) =>
             <Col key={i} lg="auto">
