@@ -8,7 +8,6 @@ const HabitModal = ()  => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
   const addHabit = (habit) => {
     fetch(habitsEndpoint, {
       method: 'POST',
@@ -24,8 +23,7 @@ const HabitModal = ()  => {
   const handleSubmit = (event) => {
 
     event.preventDefault();
-    console.log(event.target[0].value)
-
+    
     let habit = {
       action: event.target[0].value, 
       time: event.target[1].value,
