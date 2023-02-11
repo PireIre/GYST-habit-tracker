@@ -26,11 +26,11 @@ function HabitCard({ habit }) {
   return (
     <Row>
         <Col>
-          <Card style={{ width: '11rem', margin: "10px 5px" }}>
+          <Card style={{ width: '160px', height: '160px' }}>
             <Card.Body>
               <Card.Title>{habit.action}</Card.Title>
-              <Card.Text>Length: {habit.time} min</Card.Text>
-              <Card.Text>Where: {habit.location}</Card.Text>
+              <Card.Text>{habit.time} min</Card.Text>
+              <Card.Text>{habit.location}</Card.Text>
               <div onClick={() => handleDeleteHabit(habit._id)} style={{ color: "red", display: "inline", cursor: "pointer" }}>X</div>
             </Card.Body>
           </Card>
