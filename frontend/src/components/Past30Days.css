@@ -1,0 +1,13 @@
+.past-30-days {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.past-30-days__item {
+  background-color: #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+}
