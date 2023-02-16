@@ -10,6 +10,8 @@ import Past30Days from './Past30Days'
 
 const Board = () => {
   const [backendHabits, setBackendHabits] = useState("")
+  const [currentHabit, setCurrentHabit] = useState({})
+  
   const habitsEndpoint = "/api/habit";
 
   const fetchHabits = async () => {
@@ -25,24 +27,24 @@ const Board = () => {
     }
   };
 
-  useEffect(() => fetchHabits, [backendHabits])
+  useEffect(() => fetchHabits, [currentHabit])
 
   return (
     <>
       <GystNavbar />
       <Container fluid>
         <Row>
-          <Col xs={1}>
+          <Col lg="auto" xs={1}>
           <Past30Days />
           </Col>
 
           {backendHabits && backendHabits.map((habit, i) =>
             <Col key={i} lg="auto">
-              <HabitCard habit={habit} />
+              <HabitCard habit={habit} setCurrentHabit={setCurrentHabit}/>
             </Col>
           )}
 
-          <Col ><HabitModal /></Col>
+          <Col ><HabitModal setCurrentHabit={setCurrentHabit}/></Col>
         </Row>
       </Container>
     </>

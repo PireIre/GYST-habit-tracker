@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const HabitModal = ()  => {
+const HabitModal = ({setCurrentHabit})  => {
   const habitsEndpoint = "/api/habit";
 
   const [show, setShow] = useState(false);
@@ -18,6 +18,7 @@ const HabitModal = ()  => {
       body: JSON.stringify(habit),
     })
       .then(res => res.json())
+      .then(habit => setCurrentHabit(habit))
   }
 
   const handleSubmit = (event) => {
