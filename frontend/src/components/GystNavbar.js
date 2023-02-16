@@ -18,7 +18,7 @@ function GystNavbar() {
       <Navbar.Brand href="/"><b>G</b>et <b>Y</b>our <b>S</b>hit <b>T</b>ogether</Navbar.Brand>
       <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-            <div>Mark Otto</div>
+            <div>Ire Pire</div>
             <div style={{ fontWeight: "bold", cursor: "pointer" }} onClick={handleLogout} href="/login">Log out</div>
           </Navbar.Text>
         </Navbar.Collapse>
