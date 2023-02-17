@@ -30,3 +30,19 @@
   color: #fff;
 }
 
+.settingIcon {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+  width: 20px;
+}
+
+.settingIcon:hover {
+  cursor: pointer;
+}
+
+.card {
+  position: relative;
+}
+

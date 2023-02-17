@@ -4,9 +4,9 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import './HabitCard.css'
 
-function HabitCard({ habit, setCurrentHabit}) {
-  const habitsEndpoint = "/api/habit";
 
+
+function HabitCard({ habit, setCurrentHabit, setEditHabitModal, handleShowHabitModalHabitModal}) {
   const [selectedDates, setSelectedDates] = useState(new Set());
 
 
@@ -20,6 +20,12 @@ function HabitCard({ habit, setCurrentHabit}) {
     setSelectedDates(newSelectedDates);
 
   };
+
+  const handleEditIconClick = (id) => {
+    setEditHabitModal(true)
+    handleShowHabitModalHabitModal()
+    setCurrentHabit(habit)
+  }
 
   const renderDots = () => {
     const dots = [];
@@ -45,26 +51,6 @@ function HabitCard({ habit, setCurrentHabit}) {
     return dots;
   };
 
-  console.log(selectedDates)
-
-
-  const handleDeleteHabit = (habitId) => {
-    try {
-      fetch(habitsEndpoint + "/" + habitId, {
-        method: 'DELETE',
-        headers: {
-          'Content-Type': 'application/json',
-          'x-auth-token': window.localStorage.getItem('x-auth-token')
-        }
-      })
-        .then(res => res.json())
-        .then(habit => setCurrentHabit(habit))
-
-    } catch (error) {
-      console.log("Could not delete the habit!" + error);
-    }
-
-  }
 
   return (
     <Row>
@@ -74,8 +60,8 @@ function HabitCard({ habit, setCurrentHabit}) {
             <Card.Title>{habit.action}</Card.Title>
             <Card.Text>{habit.time} min</Card.Text>
             <Card.Text>{habit.location}</Card.Text>
-            <div onClick={() => handleDeleteHabit(habit._id)} style={{ color: "red", display: "inline", cursor: "pointer" }}>X</div>
           </Card.Body>
+          <img onClick={handleEditIconClick} src="https://chains.cc/assets/icons/gear-c9707fddb4983b397b5a47865115d6cc.svg" className="settingIcon"></img>
         </Card> <br />
         <ul className="dots">
           {renderDots()}

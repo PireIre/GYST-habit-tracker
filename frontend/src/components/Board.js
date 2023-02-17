@@ -11,7 +11,17 @@ import Past30Days from './Past30Days'
 const Board = () => {
   const [backendHabits, setBackendHabits] = useState("")
   const [currentHabit, setCurrentHabit] = useState({})
-  
+  const [showHabitModal, setShowHabitModal] = useState(false);
+  const [editHabitModal, setEditHabitModal] = useState(false);
+
+
+  const handleCloseHabitModal = () => setShowHabitModal(false);
+
+  const handleShowHabitModalHabitModal = () => {
+    setShowHabitModal(true)
+  };
+
+
   const habitsEndpoint = "/api/habit";
 
   const fetchHabits = async () => {
@@ -35,16 +45,32 @@ const Board = () => {
       <Container fluid>
         <Row>
           <Col lg="auto" xs={1}>
-          <Past30Days />
+            <Past30Days />
           </Col>
 
           {backendHabits && backendHabits.map((habit, i) =>
             <Col key={i} lg="auto">
-              <HabitCard habit={habit} setCurrentHabit={setCurrentHabit}/>
+              <HabitCard 
+                habit={habit} 
+                setCurrentHabit={setCurrentHabit} 
+                setShowHabitModal={setShowHabitModal} 
+                setEditHabitModal={setEditHabitModal}
+                handleShowHabitModalHabitModal={handleShowHabitModalHabitModal}
+              />
             </Col>
           )}
-
-          <Col ><HabitModal setCurrentHabit={setCurrentHabit}/></Col>
+          
+          <Col>
+            <HabitModal
+              currentHabit={currentHabit}
+              handleCloseHabitModal={handleCloseHabitModal}
+              handleShowHabitModalHabitModal={handleShowHabitModalHabitModal}
+              setCurrentHabit={setCurrentHabit}
+              showHabitModal={showHabitModal}
+              editHabitModal={editHabitModal}
+              setEditHabitModal={setEditHabitModal}
+              />
+          </Col>
         </Row>
       </Container>
     </>
