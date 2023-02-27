@@ -46,7 +46,8 @@ router.put("/:id", auth, async(req, res) => {
   const habit = await Habit.findByIdAndUpdate(req.params.id, { 
     action: req.body.action,
     time: req.body.time,
-    location: req.body.location
+    location: req.body.location,
+    days: req.body.days
    }, { new: true });
 
   if (!habit) return res.status(404).send("Habit does not exist")
@@ -65,6 +66,8 @@ router.put("/:id", auth, async(req, res) => {
       nestedHabit.action = req.body.action;
       nestedHabit.time = req.body.time;
       nestedHabit.location = req.body.location;
+      nestedHabit.days = req.body.days;
+
 
       // Save the changes to the bundle document
       await bundle.save();

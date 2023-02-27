@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
 
-const HabitModal = ({currentHabit, setCurrentHabit, showHabitModal, handleCloseHabitModal, handleShowHabitModalHabitModal, editHabitModal, setEditHabitModal})  => {
+const HabitModal = ({currentHabit, setCurrentHabit, showHabitModal, handleCloseHabitModal, handleShowHabitModalHabitModal, editHabitModal, setEditHabitModal, updateHabit})  => {
 
   const habitsEndpoint = "/api/habit";
 
@@ -23,30 +23,26 @@ const HabitModal = ({currentHabit, setCurrentHabit, showHabitModal, handleCloseH
       .then(habit => setCurrentHabit(habit))
   }
 
-  const updateHabit = (habit) => {
-    fetch(habitsEndpoint + "/" + currentHabit._id, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-auth-token': window.localStorage.getItem('x-auth-token')
-      },
-      body: JSON.stringify(habit),
-    })
-      .then(res => res.json())
-      .then(habit => setCurrentHabit(habit))
-  }
 
   const handleSubmit = (event) => {
 
     event.preventDefault();
 
-    let habit = {
+    let updatedHabit = {
+      _id: currentHabit._id,
       action: event.target[0].value, 
       time: event.target[1].value,
       location: event.target[2].value,
     }
 
-    editHabitModal ? updateHabit(habit) : addHabit(habit)
+
+    let addedHabit = {
+      action: event.target[0].value, 
+      time: event.target[1].value,
+      location: event.target[2].value,
+    }
+
+    editHabitModal ? updateHabit(updatedHabit) : addHabit(addedHabit)
   
   }
 

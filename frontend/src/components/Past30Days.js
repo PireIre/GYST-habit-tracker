@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./Past30Days.css";
 import logo from "../static/Logo.png"
 
-const Past30Days = () => {
-  const [days, setDays] = useState([]);
+const Past30Days = ( {days, setDays} ) => {
 
   useEffect(() => {
     const today = new Date();

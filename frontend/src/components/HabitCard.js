@@ -6,19 +6,21 @@ import './HabitCard.css'
 
 
 
-function HabitCard({ habit, setCurrentHabit, setEditHabitModal, handleShowHabitModalHabitModal}) {
-  const [selectedDates, setSelectedDates] = useState(new Set());
+function HabitCard({ habit, setCurrentHabit, setEditHabitModal, handleShowHabitModalHabitModal, updateHabit, days, currentHabit }) {
 
+  const backendDates = new Set(habit.days);
 
   const handleDotClick = (date) => {
-    const newSelectedDates = new Set(selectedDates);
-    if (newSelectedDates.has(date)) {
-      newSelectedDates.delete(date);
-    } else {
-      newSelectedDates.add(date);
-    }
-    setSelectedDates(newSelectedDates);
 
+    if (backendDates.has(date)) {
+      backendDates.delete(date);
+    } else {
+      backendDates.add(date);
+    }
+    habit.days = Array.from(backendDates)
+
+    setCurrentHabit(habit)
+    updateHabit(habit)
   };
 
   const handleEditIconClick = (id) => {
@@ -26,31 +28,6 @@ function HabitCard({ habit, setCurrentHabit, setEditHabitModal, handleShowHabitM
     handleShowHabitModalHabitModal()
     setCurrentHabit(habit)
   }
-
-  const renderDots = () => {
-    const dots = [];
-    const today = new Date();
-    for (let i = 1; i <= 30; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() - i);
-      const dateString = date.toDateString();
-      const isSelected = selectedDates.has(dateString);
-      dots.push(
-        <li 
-        className="dot-field"
-        key={i}
-        > 
-        <div
-          className={`dot${isSelected ? ' selected' : ''}`}
-          onClick={() => handleDotClick(dateString)}
-        >
-        </div>
-        </li>
-      );
-    }
-    return dots;
-  };
-
 
   return (
     <Row>
@@ -64,7 +41,18 @@ function HabitCard({ habit, setCurrentHabit, setEditHabitModal, handleShowHabitM
           <img onClick={handleEditIconClick} src="https://chains.cc/assets/icons/gear-c9707fddb4983b397b5a47865115d6cc.svg" className="settingIcon"></img>
         </Card> <br />
         <ul className="dots">
-          {renderDots()}
+          {days.map(day => 
+            <li
+              className="dot-field"
+              key={day}
+            >
+              <div
+                className={`dot${backendDates.has(day) ? ' selected' : ''}`}
+                onClick={() => handleDotClick(day)}
+              >
+              </div>
+            </li>
+          )}
         </ul>
       </Col>
     </Row>

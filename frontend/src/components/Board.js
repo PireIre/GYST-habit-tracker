@@ -13,16 +13,38 @@ const Board = () => {
   const [currentHabit, setCurrentHabit] = useState({})
   const [showHabitModal, setShowHabitModal] = useState(false);
   const [editHabitModal, setEditHabitModal] = useState(false);
+  const [days, setDays] = useState([]);
 
+  const habitsEndpoint = "/api/habit";
 
   const handleCloseHabitModal = () => setShowHabitModal(false);
 
   const handleShowHabitModalHabitModal = () => {
     setShowHabitModal(true)
   };
+  
+  console.log(currentHabit)
 
+  const updateHabit = (habit) => {
 
-  const habitsEndpoint = "/api/habit";
+    let updatedHabit = {
+      action: habit.action,
+      time: habit.time,
+      location: habit.location,
+      days: habit.days,
+    }
+
+    fetch(habitsEndpoint + "/" + habit._id, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-auth-token': window.localStorage.getItem('x-auth-token')
+      },
+      body: JSON.stringify(updatedHabit),
+    })
+      .then(res => res.json())
+      .then(habit => setCurrentHabit(habit))
+  }
 
   const fetchHabits = async () => {
     try {
@@ -37,7 +59,7 @@ const Board = () => {
     }
   };
 
-  useEffect(() => fetchHabits, [currentHabit])
+  useEffect(() =>  fetchHabits, [currentHabit])
 
   return (
     <>
@@ -45,23 +67,30 @@ const Board = () => {
       <Container fluid>
         <Row>
           <Col lg="auto" xs={1}>
-            <Past30Days />
+            <Past30Days 
+            days={days}
+            setDays={setDays}
+            />
           </Col>
 
           {backendHabits && backendHabits.map((habit, i) =>
             <Col key={i} lg="auto">
               <HabitCard 
+                updateHabit={updateHabit}
                 habit={habit} 
+                currentHabit={currentHabit}
                 setCurrentHabit={setCurrentHabit} 
                 setShowHabitModal={setShowHabitModal} 
                 setEditHabitModal={setEditHabitModal}
                 handleShowHabitModalHabitModal={handleShowHabitModalHabitModal}
+                days={days}
               />
             </Col>
           )}
           
           <Col>
             <HabitModal
+              updateHabit={updateHabit}
               currentHabit={currentHabit}
               handleCloseHabitModal={handleCloseHabitModal}
               handleShowHabitModalHabitModal={handleShowHabitModalHabitModal}
