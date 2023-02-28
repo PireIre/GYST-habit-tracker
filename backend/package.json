@@ -18,7 +18,9 @@
     "express-async-errors": "^2.1.0",
     "joi": "^17.7.0",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.7.2"
+    "mongoose": "^6.7.2",
+    "winston": "^2.4.0",
+    "winston-mongodb": "^3.0.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
