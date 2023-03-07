@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --watchAll --verbose",
     "start": "node index",
     "frontend": "cd .. && cd frontend && npm start",
     "dev": "concurrently -n 'backend,client' -c 'yellow,blue' \"nodemon index.js\" \"npm run frontend\""
@@ -23,6 +23,7 @@
     "winston-mongodb": "^3.0.0"
   },
   "devDependencies": {
+    "jest": "^29.5.0",
     "nodemon": "^2.0.20"
   }
 }
