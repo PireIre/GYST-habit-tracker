@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll --verbose",
+    "test": "jest --watchAll --verbose --coverage",
     "start": "node index",
     "frontend": "cd .. && cd frontend && npm start",
     "dev": "concurrently -n 'backend,client' -c 'yellow,blue' \"nodemon index.js\" \"npm run frontend\""
@@ -24,6 +24,7 @@
   },
   "devDependencies": {
     "jest": "^29.5.0",
-    "nodemon": "^2.0.20"
+    "nodemon": "^2.0.20",
+    "supertest": "^3.0.0"
   }
 }

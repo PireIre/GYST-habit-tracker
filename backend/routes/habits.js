@@ -2,8 +2,8 @@ const express = require('express')
 const { validate, Habit } = require('../models/habit')
 const { Bundle } = require('../models/bundle')
 const router = express.Router();
-const auth = require("../middleware/auth")
-
+const auth = require("../middleware/auth");
+const validateObjectId = require("../middleware/validateObjectId")
 
 // GET all
 router.get('/', async(req, res) => {
@@ -14,8 +14,8 @@ router.get('/', async(req, res) => {
 })
 
 // GET one
-router.get('/:id', auth, async (req,res) => {
-    const habit = await Habit.findById(req.params.id)
+router.get('/:id', validateObjectId, async (req,res) => {
+  const habit = await Habit.findById(req.params.id)
 
   if (!habit) return res.status(404).send("404 - Habit not found")
 

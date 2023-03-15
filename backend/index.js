@@ -6,5 +6,6 @@ require('./startup/routes')(app)
 require('./startup/db')()
 require('./startup/config')()
 
-app.listen(4000)
+const server = app.listen(4000)
 
+module.exports = server;
