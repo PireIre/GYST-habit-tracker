@@ -3,6 +3,11 @@
 This is a habit tracker app inspired by the "Atomic Habits" book.
 
 ## RUN THE PROJECT: 
-$ cd backend
+### Docker
+- first time: `docker-compose up --build`
+- otherwise: `docker-compose up`
 
-$ npm run dev (brings up frontend + backend)
+
+### Using Node.js/nvm directly
+1. `cd backend`
+2. `npm run dev` (brings up frontend + backend)
