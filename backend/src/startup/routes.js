@@ -1,7 +1,7 @@
-const habit = require('../../routes/habits')
-const bundle = require('../../routes/bundles')
-const user = require('../../routes/users')
-const auth = require('../../routes/auth')
+const habit = require('../routes/habits')
+const bundle = require('../routes/bundles')
+const user = require('../routes/users')
+const auth = require('../routes/auth')
 const error = require('../middleware/error')
 const express = require('express')
 
