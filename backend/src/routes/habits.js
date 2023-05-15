@@ -1,9 +1,9 @@
 const express = require('express')
-const { validate, Habit } = require('../src/models/habit')
-const { Bundle } = require('../src/models/bundle')
+const { validate, Habit } = require('../models/habit')
+const { Bundle } = require('../models/bundle')
 const router = express.Router();
-const auth = require("../src/middleware/auth");
-const validateObjectId = require("../src/middleware/validateObjectId")
+const auth = require("../middleware/auth");
+const validateObjectId = require("../middleware/validateObjectId")
 
 // GET all
 router.get('/', async(req, res) => {

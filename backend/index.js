@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 
-require('./startup/logging')()
-require('./startup/routes')(app)
-require('./startup/db')()
-require('./startup/config')()
+require('./src/models/startup/logging')()
+require('./src/models/startup/routes')(app)
+require('./src/models/startup/db')()
+require('./src/models/startup/config')()
 
 const server = app.listen(4000)
 

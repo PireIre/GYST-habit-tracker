@@ -1,8 +1,8 @@
 const express = require('express')
-const { validate, Bundle } = require('../src/models/bundle')
-const { Habit } = require('../src/models/habit')
+const { validate, Bundle } = require('../models/bundle')
+const { Habit } = require('../models/habit')
 const router = express.Router();
-const auth = require("../src/middleware/auth")
+const auth = require("../middleware/auth")
 
 
 // GET all bundles
