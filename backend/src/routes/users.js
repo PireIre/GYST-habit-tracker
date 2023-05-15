@@ -1,8 +1,8 @@
 const express = require('express')
-const { validate, User } = require('../src/models/user')
+const { validate, User } = require('../models/user')
 const router = express.Router();
 const bcrypt = require("bcrypt")
-const auth = require("../src/middleware/auth")
+const auth = require("../middleware/auth")
 
 
 // GET

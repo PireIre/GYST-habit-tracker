@@ -1,9 +1,9 @@
 const express = require('express')
-const { User } = require('../src/models/user')
+const { User } = require('../models/user')
 const router = express.Router();
 const bcrypt = require("bcrypt")
 const Joi = require('joi');
-const auth = require("../src/middleware/auth")
+const auth = require("../middleware/auth")
 
 
 // POST
