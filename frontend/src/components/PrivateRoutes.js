@@ -32,7 +32,7 @@ const PrivateRoutes = () => {
           setLoading(false);
         })
     } else {
-      setLoading(true); // in case there is no token
+      setLoading(false); // in case there is no token
     }
   }, [])
 
