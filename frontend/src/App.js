@@ -5,19 +5,24 @@ import LoginPage from "./components/LoginPage"
 import RegisterPage from "./components/RegisterPage"
 import NotFound from "./components/NotFound"
 import PrivateRoutes from "./components/PrivateRoutes"
-
+import PublicRoutes from "./components/PublicRoutes"
+import GystNavbar from './components/GystNavbar'
 
 
 function App() {
   return (
     <main>
+    <GystNavbar/>
+
       <Routes>
-        <Route path="/login" element={<LoginPage />}></Route>
-        <Route path="/register" element={<RegisterPage />}></Route>
-        <Route path="/not-found" element={<NotFound />}></Route>
+        <Route element={<PublicRoutes />}>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />}></Route>
+        </Route>
         <Route element={<PrivateRoutes />}>
           <Route path='/' element={<Board />} />
         </Route>
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </main>
   );
