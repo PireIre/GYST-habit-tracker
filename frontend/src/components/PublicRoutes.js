@@ -5,7 +5,6 @@ import Spinner from 'react-bootstrap/Spinner';
 
 
 const PrivateRoutes = () => {
-  const [loading, setLoading] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 
@@ -24,26 +23,16 @@ const PrivateRoutes = () => {
         .then((json) => {
           if (json._id) {
             setIsAuthenticated(true)
-            setLoading(false);
           }
         })
         .catch((err) => {
           setIsAuthenticated(false)
-          setLoading(false);
         })
-    } else {
-      setLoading(false); // in case there is no token
-    }
+    } 
   }, [])
 
-  if (loading) return (
-  <Spinner animation="border" role="status">
-    <span className="visually-hidden">Loading...</span>
-  </Spinner>
-  ); 
-
   return (
-    isAuthenticated ? <Outlet /> : <Navigate to='/login' />
+    isAuthenticated ? <Navigate to='/' /> : <Outlet /> 
 
   )
 }
