@@ -35,6 +35,8 @@ function LoginPage() {
       })
   }
   return (
+    <>
+    <h1 className="login-title">Login</h1>
     <div className="form-container">
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group controlId="formBasicEmail" className="form-group">
@@ -65,8 +67,12 @@ function LoginPage() {
         <Button variant="primary" type="submit" className="button">
           Submit
         </Button>
+        <Form.Text className="text-muted">
+           Don't have an account? Register <a href="/register">here</a>.
+          </Form.Text>
       </Form>
     </div>
+    </>
   );
 }
 

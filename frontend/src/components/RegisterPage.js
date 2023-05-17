@@ -39,7 +39,9 @@ function RegisterPage() {
   }
 
   return (
-    <div className="form-container">
+    <>
+       <h1 className="login-title">Register</h1>
+        <div className="form-container">
       <Form className="form" onSubmit={handleSubmit}>
         <Form.Group controlId="username" className="form-group">
           <Form.Label className="form-label">Username</Form.Label>
@@ -88,8 +90,12 @@ function RegisterPage() {
         <Button variant="primary" type="submit" className="button">
           Submit
         </Button>
+        <Form.Text className="text-muted">
+           Already have an account? Login <a href="/login">here</a>.
+          </Form.Text>
       </Form>
     </div>
+    </>
   );
 }
 
