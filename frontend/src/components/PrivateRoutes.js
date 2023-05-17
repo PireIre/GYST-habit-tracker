@@ -1,13 +1,13 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import React, { useEffect, useState } from "react"
+import React, { useContext, useEffect, useState } from "react"
 import Spinner from 'react-bootstrap/Spinner';
+import { AuthContext } from './AuthContext';
 
 
 
 const PrivateRoutes = () => {
   const [loading, setLoading] = useState(true);
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
 
   useEffect(() => {
     // send jwt to API to see if it's valid
