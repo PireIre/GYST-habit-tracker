@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Past30Days from './Past30Days'
+import { decodeToken } from "react-jwt";
 
 
 const Board = () => {
@@ -15,6 +16,11 @@ const Board = () => {
   const [days, setDays] = useState([]);
 
   const habitsEndpoint = "/api/habit";
+
+  const authToken = decodeToken(window.localStorage.getItem('x-auth-token'));
+  const currentlyLoggedInUserId = authToken._id
+  console.log(currentlyLoggedInUserId)
+
 
   const handleCloseHabitModal = () => setShowHabitModal(false);
 
@@ -47,7 +53,7 @@ const Board = () => {
 
   const fetchHabits = async () => {
     try {
-      fetch(habitsEndpoint)
+      fetch(habitsEndpoint + "/user/" + currentlyLoggedInUserId)
         .then(res => res.json())
         .then(habits => {
           setBackendHabits(habits)

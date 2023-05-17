@@ -22,6 +22,16 @@ router.get('/:id', validateObjectId, async (req,res) => {
   res.send(habit)
 })
 
+// GET all by userId
+router.get('/user/:userId', async (req,res) => {
+  const userId = req.params.userId;
+  const habits = await Habit.find({ userId });
+
+  if (!habits) return res.status(400).send("No habits for that user ID")
+
+  res.send(habits)
+})
+
 // POST
 router.post("/", auth, async (req, res) => {
   const { error } = validate(req.body);
@@ -30,7 +40,8 @@ router.post("/", auth, async (req, res) => {
   let habit = new Habit({
     action: req.body.action,
     time: req.body.time,
-    location: req.body.location
+    location: req.body.location,
+    userId: req.body.userId
   })
 
   habit = await habit.save()
@@ -47,7 +58,8 @@ router.put("/:id", auth, async(req, res) => {
     action: req.body.action,
     time: req.body.time,
     location: req.body.location,
-    days: req.body.days
+    days: req.body.days,
+    userId: req.body.userId
    }, { new: true });
 
   if (!habit) return res.status(404).send("Habit does not exist")
@@ -67,6 +79,7 @@ router.put("/:id", auth, async(req, res) => {
       nestedHabit.time = req.body.time;
       nestedHabit.location = req.body.location;
       nestedHabit.days = req.body.days;
+      nestedHabit.userId = req.body.userId;
 
 
       // Save the changes to the bundle document
