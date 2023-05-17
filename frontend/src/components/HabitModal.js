@@ -1,9 +1,12 @@
 import React from 'react';
 import { Modal, Button, Form } from 'react-bootstrap';
+import { decodeToken } from "react-jwt";
+
 
 const HabitModal = ({currentHabit, setCurrentHabit, showHabitModal, handleCloseHabitModal, handleShowHabitModalHabitModal, editHabitModal, setEditHabitModal, updateHabit})  => {
 
   const habitsEndpoint = "/api/habit";
+  const authToken = decodeToken(window.localStorage.getItem('x-auth-token'));
 
   const handleAddHabitButtonClick = () => {
     setEditHabitModal(false)
@@ -40,6 +43,7 @@ const HabitModal = ({currentHabit, setCurrentHabit, showHabitModal, handleCloseH
       action: event.target[0].value, 
       time: event.target[1].value,
       location: event.target[2].value,
+      userId: authToken._id,
     }
 
     editHabitModal ? updateHabit(updatedHabit) : addHabit(addedHabit)
