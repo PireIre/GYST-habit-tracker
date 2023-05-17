@@ -4,7 +4,6 @@ import HabitModal from "./HabitModal";
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import GystNavbar from './GystNavbar'
 import Past30Days from './Past30Days'
 
 
@@ -63,7 +62,6 @@ const Board = () => {
 
   return (
     <>
-      <GystNavbar />
       <Container fluid>
         <Row>
           <Col lg="auto" xs={1}>
